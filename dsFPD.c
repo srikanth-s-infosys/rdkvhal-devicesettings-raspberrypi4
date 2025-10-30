@@ -982,7 +982,7 @@ dsError_t dsFPSetLEDState( dsFPDLedState_t state )
  *
  * @warning  This API is Not thread safe
  */
-dsError_t dsFPGetSupportedLEDStates(unsigned int* states)
+/*dsError_t dsFPGetSupportedLEDStates(unsigned int* states)
 {
     dsError_t   enErrorCode = dsERR_NONE;
 
@@ -1014,7 +1014,7 @@ dsError_t dsFPGetSupportedLEDStates(unsigned int* states)
 	}
 
 	return enErrorCode;
-}
+}*/
 
 void* led_blink_thread( void *arg )
 {
