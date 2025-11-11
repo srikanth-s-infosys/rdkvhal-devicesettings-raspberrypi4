@@ -866,6 +866,7 @@ dsError_t dsFPGetLEDState(dsFPDLedState_t* state)
     dsError_t   enErrorCode = dsERR_NONE;
 
     hal_info("invoked.\n");
+    fprintf(stderr, "invoked dsFPGetLEDState .... \n");
 
     if ( state != NULL )
     {
@@ -909,6 +910,7 @@ dsError_t dsFPSetLEDState( dsFPDLedState_t state )
     dsError_t   enErrorCode = dsERR_NONE;
 
     hal_info("invoked.\n");
+    fprintf(stderr, "invoked dsFPSetLEDState .... \n");
 
     DS_HAL_Lock();
 
@@ -929,11 +931,19 @@ dsError_t dsFPSetLEDState( dsFPDLedState_t state )
             break; /* dsFPD_LED_DEVICE_STANDBY */
 
         case dsFPD_LED_DEVICE_WPS_CONNECTING:
-		case dsFPD_LED_DEVICE_WPS_CONNECTED:
-		case dsFPD_LED_DEVICE_WPS_ERROR:
-		case dsFPD_LED_DEVICE_FACTORY_RESET:
-		case dsFPD_LED_DEVICE_USB_UPGRADE:
-		case dsFPD_LED_DEVICE_SOFTWARE_DOWNLOAD_ERROR:
+        case dsFPD_LED_DEVICE_WPS_CONNECTED:
+        case dsFPD_LED_DEVICE_WPS_ERROR:
+        case dsFPD_LED_DEVICE_FACTORY_RESET:
+        case dsFPD_LED_DEVICE_USB_UPGRADE:
+        case dsFPD_LED_DEVICE_SOFTWARE_DOWNLOAD_ERROR:
+        case dsFPD_LED_DEVICE_WIFI_ERROR:
+        case dsFPD_LED_DEVICE_BOOT_IN_PROGRESS:
+        case dsFPD_LED_DEVICE_COLDSTANDBY:
+        case dsFPD_LED_DEVICE_PSU_FAILURE:
+        case dsFPD_LED_DEVICE_WPS_SES_OVERLAP:
+        case dsFPD_LED_DEVICE_IP_ACQUIRED:
+        case dsFPD_LED_DEVICE_NO_IP:
+        case dsFPD_LED_DEVICE_RCU_COMMAND:
         {
             start_led_blink( );
         }
@@ -979,17 +989,26 @@ dsError_t dsFPGetSupportedLEDStates(unsigned int* states)
     dsError_t   enErrorCode = dsERR_NONE;
 
     hal_info("invoked.\n");
+    fprintf(stderr, "invoked dsFPGetSupportedLEDStates .... \n");
 
     if (states != NULL)
     {
         *states = ((1<<dsFPD_LED_DEVICE_ACTIVE)|\
-				(1<<dsFPD_LED_DEVICE_STANDBY)|\
-				(1<<dsFPD_LED_DEVICE_WPS_CONNECTING)|\
-				(1<<dsFPD_LED_DEVICE_WPS_CONNECTED)|\
-				(1<<dsFPD_LED_DEVICE_WPS_ERROR)|\
-				(1<<dsFPD_LED_DEVICE_FACTORY_RESET)|\
-				(1<<dsFPD_LED_DEVICE_USB_UPGRADE)|\
-				(1<<dsFPD_LED_DEVICE_SOFTWARE_DOWNLOAD_ERROR));
+                   (1<<dsFPD_LED_DEVICE_STANDBY)|\
+                   (1<<dsFPD_LED_DEVICE_WPS_CONNECTING)|\
+                   (1<<dsFPD_LED_DEVICE_WPS_CONNECTED)|\
+                   (1<<dsFPD_LED_DEVICE_WPS_ERROR)|\
+                   (1<<dsFPD_LED_DEVICE_FACTORY_RESET)|\
+                   (1<<dsFPD_LED_DEVICE_USB_UPGRADE)|\
+                   (1<<dsFPD_LED_DEVICE_SOFTWARE_DOWNLOAD_ERROR)|\
+                   (1<<dsFPD_LED_DEVICE_WIFI_ERROR)|\
+                   (1<<dsFPD_LED_DEVICE_BOOT_IN_PROGRESS)|\
+                   (1<<dsFPD_LED_DEVICE_COLDSTANDBY)|\
+                   (1<<dsFPD_LED_DEVICE_PSU_FAILURE)|\
+                   (1<<dsFPD_LED_DEVICE_WPS_SES_OVERLAP)|\
+                   (1<<dsFPD_LED_DEVICE_IP_ACQUIRED)|\
+                   (1<<dsFPD_LED_DEVICE_NO_IP)|\
+                   (1<<dsFPD_LED_DEVICE_RCU_COMMAND));
     }
     else 
     {
